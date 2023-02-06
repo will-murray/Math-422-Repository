@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Math 422 A2}
+\author{williammurray29 }
+\date{January 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Q1}
+Let $A_n$ be the set of partitions of $n$ such that the smallest summand in a partition occurs once.\\
+Let $B_n$ be the set of partitions of $n$ such that none of the summands are 1.\\
+Let $C_n$ be the set of partitions of $n$ such that the number of summands is itself a summand.
+
+\subsection*{a)}
+Let $f:A_n -> B_{n+1}$ be defined as follows:
+take some $a \in A_n$ and add one to the smallest summand.
+\\\\
+Clearly this gets us a partition of $n+1$. Also, since $a$ had a distinct smallest summand $s_0 \geq 1$, we know $s_0 + 1 \geq 2$.\\\\
+Claim: Two distinct partitions $p_1,p_2$ of $n$ with exactly one smallest summand will satisfy $f(p_1) \ne f(p_2)$. \\
+
+Proof: In terms of Ferrer's diagrams, if $p_1$ and $p_2$ have the same smallest summand they have equal dots in thier last row. Since $p_1 \ne p_2$ they must differ in their other rows. So when we add a dot to thier last rows they differ $\Rightarrow f(p_1) \ne f(p_2)$. On the other hand if they have different last rows, when we add one to each last row they will still be different.
+
+So we know that $f$ is an injection. Furthermore, for every $p \in B_n$, we can obtain a $q \in A_n$ by removing the one from $q's$ smallest summand. So $f$ is surjective. So we know that $f$ is a bijection and $|A_n| = |B_n|$. 
+
+
+\section*{Q3 a)}
+We can count the number of permutations of $[n]$ in two ways. Firstly, there's $n!$ permutations of $[n]$.
+
+We will count the number of permutations of $[n]$ which fixes $n-k$ elements and re-indexes $k$ elements (for some particular $k\in \{0,1,...,n\}$). Firstly, there's $n \choose k$ ways to select a $k$ subset of elements to re-index. Once the $k$ elements are chosen, we know the $n-k$ elements are already in their fixed indices. For each of the $n \choose k$ subsets, we can derange these elements in $d_k$ ways. So we know that there's ${n \choose k} d_k$ permutations of $n$ which derange exactly $k$ elements and fix the remaining $n-k$.
+
+Every permutation of $n$ deranges $k$ elements and fixes the reamining $n -k$ elements, where $k \in \{0,1,...,n\}$. So we can count the number of permutations by ranging over $k$
+
+
+
+$$n! = \sum_{k=0}^n {n \choose k} d_k$$ 
+
+\section*{Q4}
+Let $A(n)$ count the number of linear arrangements of $x_1,x_1,x_2,x_2,...,x_n,x_n$. We know that $A(2) = 2$, since ($x_1,x_2,x_1,x_2$) and ($x_2,x_1,x_2,x_1$) are the only possibilities.\\
+Consider some arrangement of $x_1,x_1,x_2,x_2,...,x_n,x_n$ which satisfies the desired property. We will count the number of ways we could insert two new symbols into this arrangement so that we obtain an arrangement of $x_1,x_2,...,x_{n+1}, x_{n+1}$ with the desired property.\\
+There's exactly $n+1$ locations in where $x_{n+1}$ could be inserted. Since we are inserting 2 occurrences of $x_{n+1}$ we have $n+1 \choose 2$ ways to form a new arrangement.\\
+So for each of the $A(n-1)$ arrangements for $n-1$ symbols there's $n choose 2$ arrangement of $n$ distinct symbols. This yields the recurrence relation:
+$$A(n) = {n \choose 2}A(n-1), n\geq 3$$
+
+
+    
+
+\section*{Q6}
+
+Theorem 3.8 states that for a collection of finite sets $A_1,...,A_n$, the number of elements belonging to exactly $m$ of these sets is
+$$N_{=m} = S_m - {m+1 \choose m}S_{m+1} + {m+2 \choose m}S_{m+2} + ... + (-1)^{n-m} {n \choose m} S_n$$
+So we can express the number of elements belonging to an even number of sets in the following way.
+$$\sum_{i=1}^{n/2} N_{m = 2i}$$ which equals
+$$\sum_{i=1}^{n/2} S_{2i} - {2i+1 \choose m}S_{2i+1} + {2i+2 \choose m}S_{2i+2} + ... + (-1)^{n-m} {n \choose m} S_n$$
+
+
+\end{document}
+
